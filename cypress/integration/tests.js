@@ -23,9 +23,10 @@ describe('QA Automation Take Home', () => {
         
         cy.get('button[type="submit"]').click();
 
+        // Find the added record
         cy.fixture('data').then( (data) => {
             cy.get('.note-container li').each(($element, index, $list) => {
-                if( $element.text().includes(name) )
+                if( $element.text().includes(data.name) )
                     cy.wrap($element).should('have.text', data.name);
             }) 
         })
@@ -39,13 +40,15 @@ describe('QA Automation Take Home', () => {
         } )
         cy.get('button[type="submit"]').click();
 
+        // Find the added record
         cy.fixture('data').then( (data) => {
             cy.get('.note-container li').each(($element, index, $list) => {
-                if( $element.text().includes(name) )
+                if( $element.text().includes(data.name) )
                     cy.wrap($element).should('have.text', data.name);
             }) 
         })
 
+        // Delete the record
         cy.get('.note-container button').each(($element, index, $list) => {
             cy.wrap($element).click();
         })
